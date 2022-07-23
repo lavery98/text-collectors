@@ -1,8 +1,15 @@
 #!/bin/bash
 
-# Expose the names of LVM volumes
-# To use create a cronjob with
+# Expose the names of LVM volumes to help mapping from device to name
+#
+# Usage: lvm-name-collector
+#
+# Cronjob
 # */5 * * * * /path/to/collector/lvm-name-collector | sponge /var/lib/prometheus/node-exporter/lvm-name.prom
+#
+# This will expose every 5 minutes information about the logical volume names
+#
+# Author: Ashley Lavery <ashley@sa-irc.com>
 
 set -eu
 

@@ -17,6 +17,7 @@
 # This will expose every minute information about the logical volume groups
 #
 # Author: Badreddin Aboubakr <badreddin.aboubakr@cloud.ionos.com>
+# Modified by Ashley Lavery <ashley@sa-irc.com> to add the size of logical volumes
 
 
 set -eu
