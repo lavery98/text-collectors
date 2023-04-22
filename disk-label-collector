@@ -22,5 +22,5 @@ disk_labels=$(lsblk -o NAME,KNAME --json | jq -r '[.. | objects | select(has("kn
 echo "# HELP node_disk_label_info Mapping from disk device to disk label"
 echo "# TYPE node_disk_label_info gauge"
 echo "$disk_labels" | while read -r name kname; do
-  echo "node_disk_label_info{device=\"$kname\" device_label=\"$name\"}"
+  echo "node_disk_label_info{device=\"$kname\",device_label=\"$name\"}"
 done
