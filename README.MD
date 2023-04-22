@@ -3,8 +3,9 @@
 ## Scripts Used
 These are the scripts that I use with the Node Exporter Textfile Collector on my servers.
 
-- [lvm-name-collector](lvm-name-collector)
+- [lvm-name-collector](lvm-name-collector) - Deprecated in favour of disk-label-collector
 - [lvm-prom-collector](lvm-prom-collector)
+- [disk-label-collector](disk-label-collector)
 - [ipmitool](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/ipmitool)
 - [smartmon](https://github.com/prometheus-community/node-exporter-textfile-collector-scripts/blob/master/smartmon.py)
 
