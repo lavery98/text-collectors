@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Expose the names of disks to help mapping from device to name
+#
+# Usage: disk-label-collector
+#
+# Cronjob
+# */5 * * * * /path/to/collector/disk-label-collector | sponge /var/lib/prometheus/node-exporter/disk-labels.prom
+#
+# This will expose, every 5 minutes, information about the disk names
+#
+# Author: Ashley Lavery <ashley@sa-irc.com>
+
+set -eu
+
+if [ "$(id -u)" != "0" ]; then
+  1>&2 echo "This script must be run with super-user privileges."
+  exit 1
+fi
+
+disk_labels=$(lsblk -o NAME,KNAME --json | jq -r '[.. | objects | select(has("kname")) | {name,kname}] | unique | .[] | "\(.name) \(.kname)"')
+echo "# HELP node_disk_label_info Mapping from disk device to disk label"
+echo "# TYPE node_disk_label_info gauge"
+echo "$disk_labels" | while read -r name kname; do
+  echo "node_disk_label_info{device=\"$kname\",device_label=\"$name\"} 1"
+done
